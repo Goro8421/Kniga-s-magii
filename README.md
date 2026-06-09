@@ -13,7 +13,7 @@ bash -c "$(curl -fsLS https://raw.githubusercontent.com/ngscheurich/grimoire/mai
 If this completes successfully, the `grim` command will be at your disposal:
 
 ```
-Usage: grim.sh [flags] <script>
+Usage: grim [flags] <script>
 
 Executes a grimoire script. If no <script> is provided, a script
 chooser will be shown.

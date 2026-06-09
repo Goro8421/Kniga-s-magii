@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# Usage:
+#	cmdnotif <command>
+#
+# Arguments:
+#	<command>   Command to run
+#
+# Executes a command, then displays a macOS system notification indicating
+# success or failure.
+
+set -euo pipefail
+
+cmd="$*"
+
+if eval "$cmd"; then
+	title="🟢 Command finished"
+else
+	title="🔴 Command failed"
+fi
+
+osascript -e "display notification \"$cmd\" with title \"$title\""

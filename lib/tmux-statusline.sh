@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+# Usage:
+#	tmux-statusline.sh
 #
-# Usage: tmux_statusline.sh
-#
-# Builds my tmux statusline.
-#
+# Builds my custom tmux statusline.
 
 set -euo pipefail
 

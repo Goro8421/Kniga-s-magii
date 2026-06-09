@@ -1,23 +1,22 @@
-#!/bin/bash
-#
+#!/usr/bin/env bash
+
 # Usage: init.sh
 #
 # Clones the Grimoire repo and creates a `grim` command.
-#
 
 set -euo pipefail
 
-REPO="git@github.com:ngscheurich/grimoire.git"
-DEST="${XDG_DATA_HOME:-$HOME/.local/share}/grimoire"
-LINK="$HOME/.local/bin/grim"
+repo="git@github.com:ngscheurich/grimoire.git"
+dest="${XDG_DATA_HOME:-$HOME/.local/share}/grimoire"
+link="$HOME/.local/bin/grim"
 
 # Clone repo
-if [ -d "$DEST" ]; then
+if [ -d "$dest" ]; then
 	echo "👻 Nothing happens..."
 else
-	git clone "$REPO" "$DEST"
+	git clone "$repo" "$dest"
 fi
 
 # Create symlink
-if [ -f "$LINK" ]; then rm "$LINK"; fi
-eval "ln -s $DEST/grim.sh $LINK"
+if [ -f "$link" ]; then rm "$link"; fi
+eval "ln -s $dest/bin/grim $link"

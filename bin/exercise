@@ -1,26 +1,25 @@
-#!/bin/bash
-#
-# Usage: exercise.sh <track> <exercise> [flags]
+#!/usr/bin/env bash
+
+# Usage:
+#	exercise <track> <exercise> [flags]
 #
 # Arguments:
-#	<track>       Language track
-#	<exercise>    Exercise name
+#	<track>      Language track
+#	<exercise>   Exercise name
 #
 # Flags:
 #	Additional flage to pass to the exercism CLI.
 #
 # Creates a new tmux window for the exercise. It is split vertically into two
 # panes:
-#
-# 1. 70% height; Neovim with README.md and source file tab pages
-# 2. 30% height; test command
-#
+#	1. 70% height; Neovim with README.md and source file tab pages
+#	2. 30% height; test command
 
 set -euo pipefail
 
 if [ -z "${1+x}" ]; then
 	cat <<-EOF
-		Usage: exercise.sh <track> <exercise> [flags]
+		Usage: exercise <track> <exercise> [flags]
 
 		Arguments:
 		  <track>       Language track
@@ -40,10 +39,10 @@ shift
 exercise="$1"
 shift
 
-EXERCISE_DIR="$HOME/Exercism/$track/$exercise"
-WINNAME="{} $(basename "$EXERCISE_DIR")"
+exercise_dir="$HOME/Exercism/$track/$exercise"
+winname="{} $(basename "$exercise_dir")"
 
-if [ ! -d "$EXERCISE_DIR" ]; then
+if [ ! -d "$exercise_dir" ]; then
 	gum spin --title="Downloading $track/$exercise..." -- \
 		exercism download \
 		--track "$track" \
@@ -51,7 +50,7 @@ if [ ! -d "$EXERCISE_DIR" ]; then
 		"$@"
 fi
 
-cd "$EXERCISE_DIR"
+cd "$exercise_dir"
 
 files="README.md"
 declare testcmd
@@ -63,7 +62,7 @@ gleam)
 	;;
 esac
 
-tmux new-window -c "$EXERCISE_DIR" -n "$WINNAME"
+tmux new-window -c "$exercise_dir" -n "$winname"
 tmux split-window -h -l 40%
 tmux send -t 1 "nvim -p $files" Enter
 tmux send -t 2 "$testcmd" Enter

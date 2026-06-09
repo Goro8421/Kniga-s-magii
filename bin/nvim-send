@@ -1,12 +1,11 @@
-#!/bin/bash
-#
-# Usage: nvim_send.sh <command>
+#!/usr/bin/env bash
+
+# Usage: nvim-send <command>
 #
 # Sends a command to all current Neovim instances.
 #
 # Arguments:
-#   <command>    Neovim command to run
-#
+#   <command>   Neovim command to run
 
 set -euo pipefail
 
